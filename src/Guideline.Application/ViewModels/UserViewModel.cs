@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Guideline.Application.ViewModels
 {
-    public class UserViewModel
+    public class UserViewModel : IViewModel
     {
         [Key]
         public Guid Id { get; set; }

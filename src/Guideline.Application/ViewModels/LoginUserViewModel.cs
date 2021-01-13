@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Guideline.Application.ViewModels
 {
-    public class LoginUserViewModel
+    public class LoginUserViewModel : IViewModel
     {
         [Required(ErrorMessage = "Login obrigatório")]
         [DisplayName("Login")]

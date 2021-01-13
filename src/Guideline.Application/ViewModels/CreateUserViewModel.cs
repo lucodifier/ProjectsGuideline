@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Guideline.Application.ViewModels
 {
-   public  class CreateUserViewModel
+   public  class CreateUserViewModel : IViewModel
     {
         [Required(ErrorMessage = "Nome obrigatório")]
         [MinLength(2)]

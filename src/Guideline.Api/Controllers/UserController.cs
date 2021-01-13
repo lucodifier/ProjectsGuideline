@@ -1,63 +1,118 @@
-﻿using Guideline.Application.Interfaces;
+﻿using FluentValidation.Results;
+using Guideline.Api.Exceptions;
+using Guideline.Application.Enum;
+using Guideline.Application.Interfaces;
 using Guideline.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Guideline.Api.Controllers
 {
-    [Authorize]
-    [ApiController]
-    public class UserController : ApiController
+    [Route("api/v1/[controller]")]
+    public class UserController : ApiController<UserController>
     {
         private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
+        public UserController(IHttpContextAccessor httpContextAccessor,
+            ILogger<UserController> logger,
+            IUserService userService) : base(httpContextAccessor, logger)
         {
             _userService = userService;
         }
 
         [AllowAnonymous]
-        [HttpPost, Route("v1/[controller]/register")]
+        [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateUserViewModel request)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _userService.Create(request));
+            try
+            {
+                if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+                return CustomResponse<ValidationResult>(await _userService.Create(request));
+            }
+            catch (Exception ex)
+            {
+                return CustomExceptionResponse(ex);
+            }
         }
 
         [AllowAnonymous]
-        [HttpPost, Route("v1/[controller]/login")]
+        [HttpPost, Route("login")]
         public async Task<IActionResult> Post([FromBody] LoginUserViewModel request)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _userService.Get(request.Login, request.Pass));
+            try
+            {
+                if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+                return CustomResponse<IViewModel>(await _userService.Get(request.Login, request.Pass));
+            }
+            catch (Exception ex)
+            {
+                return CustomExceptionResponse(ex);
+            }
         }
 
         [AllowAnonymous]
-        [HttpGet, Route("v1/[controller]/:id")]
-        public async Task<IActionResult> GetById(string id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] string id)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _userService.GetById(new Guid(id)));
+            try
+            {
+                return CustomResponse<IViewModel>(await _userService.GetById(new Guid(id)));
+            }
+            catch (Exception ex)
+            {
+                return CustomExceptionResponse(ex);
+            }
         }
 
         [AllowAnonymous]
-        [HttpGet, Route("v1/[controller]")]
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _userService.GetAll());
+            try
+            {
+                return CustomResponse<IEnumerable<IViewModel>>(await _userService.GetAll());
+            }
+            catch (Exception ex)
+            {
+                return CustomExceptionResponse(ex);
+            }
         }
 
         [AllowAnonymous]
-        [HttpPut, Route("v1/[controller]")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateUserViewModel request)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _userService.Update(request));
+            try
+            {
+                if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+                return CustomResponse<ValidationResult>(await _userService.Update(request));
+            }
+            catch (Exception ex)
+            {
+                return CustomExceptionResponse(ex);
+            }
         }
 
         [AllowAnonymous]
-        [HttpDelete, Route("v1/[controller]")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _userService.Remove(new Guid(id)));
+            try
+            {
+                return CustomResponse<Guid>(await _userService.Remove(new Guid(id)));
+            }
+            catch (Exception ex)
+            {
+                return CustomExceptionResponse(ex);
+            }
         }
     }
 }

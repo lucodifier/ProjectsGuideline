@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Guideline.Application.ViewModels
 {
-    public class UpdateUserViewModel
+    public class UpdateUserViewModel : IViewModel
     {
         [Required(ErrorMessage = "Id obrigatório")]
         public Guid Id { get; set; }
