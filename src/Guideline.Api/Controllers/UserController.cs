@@ -30,8 +30,9 @@ namespace Guideline.Api.Controllers
             try
             {
                 if (!ModelState.IsValid) return CustomResponse(ModelState);
+                var result = await _userService.Create(request);
 
-                return CustomResponse<ValidationResult>(await _userService.Create(request));
+                return CustomResponse<ValidationResult>(result);
             }
             catch (Exception ex)
             {

@@ -1,6 +1,5 @@
 ﻿using FluentValidation.Results;
 using Guideline.Application.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -39,12 +38,13 @@ namespace Guideline.Api.Controllers
 
             if (typeof(T) == typeof(ValidationResult))
             {
-                var validationResult = (ValidationResult)result;
-                if (validationResult.IsValid)
+                var validationResult = (ValidationResultViewModel)result;
+                
+                if (validationResult.Validation.IsValid)
                     return Created(Request.Path, result);
                 else
                 {
-                    foreach (var error in validationResult.Errors)
+                    foreach (var error in validationResult.Validation.Errors)
                     {
                         _errors.Add(error.ErrorMessage);
                     }

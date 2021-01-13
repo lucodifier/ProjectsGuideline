@@ -23,17 +23,19 @@ namespace Guideline.Application.Services
             _userRepository = userRepository;
         }
 
-        public async Task<ValidationResult> Create(CreateUserViewModel createUserViewModel)
+        public async Task<ValidationResultViewModel> Create(CreateUserViewModel createUserViewModel)
         {
             var validator = new CreateUserValidation();
             var result = await validator.ValidateAsync(createUserViewModel);
+            var validationResult = new ValidationResultViewModel(result);
             if (result.IsValid)
             {
                 var registerUser = _mapper.Map<User>(createUserViewModel);
-                await _userRepository.Add(registerUser);
+                var created = await _userRepository.Add(registerUser);
+                validationResult.Id = created.Id;
             }
 
-            return result;            
+            return validationResult;
         }
 
         public async Task<UserViewModel> Get(string login, string pass)
@@ -52,17 +54,19 @@ namespace Guideline.Application.Services
             return _mapper.Map<UserViewModel>(await _userRepository.GetById(id));
         }
 
-        public async Task<ValidationResult> Update(UpdateUserViewModel updateUserViewModel)
+        public async Task<ValidationResultViewModel> Update(UpdateUserViewModel updateUserViewModel)
         {
             var validator = new UpdateUserValidation();
             var result = await validator.ValidateAsync(updateUserViewModel);
+            var validationResult = new ValidationResultViewModel(result);
             if (result.IsValid)
             {
                 var registerUser = _mapper.Map<User>(updateUserViewModel);
-                await _userRepository.Update(registerUser);
+                var updated = await _userRepository.Update(registerUser);
+                validationResult.Id = updated.Id;
             }
 
-            return result;
+            return validationResult;
         }
 
         public async Task<Guid> Remove(Guid id)
