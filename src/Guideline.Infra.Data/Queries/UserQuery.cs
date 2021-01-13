@@ -11,6 +11,8 @@
               ,[Created]
             FROM  [dbo].[User]";
 
+        public const string SELECTUSERWITHDOCUMENT = @"exec [Users with Document]";
+
         public const string INSERT = @"INSERT INTO [dbo].[User]
            ([Id]
            ,[Name]

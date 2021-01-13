@@ -57,6 +57,14 @@ namespace Guideline.Infra.Data.Repository
             }
         }
 
+        public async Task<IEnumerable<User>> GetWithDocuments()
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                return await connection.QueryAsync<User>(UserQuery.SELECTUSERWITHDOCUMENT);
+            }
+        }
+
         public async Task<User> GetById(Guid id)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

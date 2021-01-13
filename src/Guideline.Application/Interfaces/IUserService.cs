@@ -10,6 +10,7 @@ namespace Guideline.Application.Interfaces
     {
         Task<UserViewModel> Get(string login, string pass);
         Task<IEnumerable<UserViewModel>> GetAll();
+        Task<IEnumerable<UserViewModel>> GetWithDocument();
         Task<UserViewModel> GetById(Guid id);
         Task<ValidationResultViewModel> Create(CreateUserViewModel createUserViewModel);
         Task<ValidationResultViewModel> Update(UpdateUserViewModel updateUserViewModel);
