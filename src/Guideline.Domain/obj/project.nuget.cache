@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Sk80wt9vzoldTjDw/7oQH0oVAVGnMSS+nKP0v1UE1H1O4cOaoUK/Ej8Wam6r5ECqJw0ccD/xHHk0hTwctur37A==",
+  "success": true,
+  "projectFilePath": "C:\\codes\\Volks\\Guideline\\src\\Guideline.Domain\\Guideline.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\luciano.robe\\.nuget\\packages\\fluentvalidation\\9.3.0\\fluentvalidation.9.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,9 @@
+C:\codes\Volks\Guideline\src\Guideline.Domain\bin\Debug\netcoreapp3.1\Guideline.Domain.deps.json
+C:\codes\Volks\Guideline\src\Guideline.Domain\bin\Debug\netcoreapp3.1\Guideline.Domain.dll
+C:\codes\Volks\Guideline\src\Guideline.Domain\bin\Debug\netcoreapp3.1\Guideline.Domain.pdb
+C:\codes\Volks\Guideline\src\Guideline.Domain\obj\Debug\netcoreapp3.1\Guideline.Domain.csprojAssemblyReference.cache
+C:\codes\Volks\Guideline\src\Guideline.Domain\obj\Debug\netcoreapp3.1\Guideline.Domain.AssemblyInfoInputs.cache
+C:\codes\Volks\Guideline\src\Guideline.Domain\obj\Debug\netcoreapp3.1\Guideline.Domain.AssemblyInfo.cs
+C:\codes\Volks\Guideline\src\Guideline.Domain\obj\Debug\netcoreapp3.1\Guideline.Domain.csproj.CoreCompileInputs.cache
+C:\codes\Volks\Guideline\src\Guideline.Domain\obj\Debug\netcoreapp3.1\Guideline.Domain.dll
+C:\codes\Volks\Guideline\src\Guideline.Domain\obj\Debug\netcoreapp3.1\Guideline.Domain.pdb

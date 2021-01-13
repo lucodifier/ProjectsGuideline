@@ -1,0 +1,14 @@
+C:\codes\Volks\Guideline\src\Guideline.Application\bin\Debug\netcoreapp3.1\Guideline.Application.deps.json
+C:\codes\Volks\Guideline\src\Guideline.Application\bin\Debug\netcoreapp3.1\Guideline.Application.dll
+C:\codes\Volks\Guideline\src\Guideline.Application\bin\Debug\netcoreapp3.1\Guideline.Application.pdb
+C:\codes\Volks\Guideline\src\Guideline.Application\bin\Debug\netcoreapp3.1\Guideline.Domain.dll
+C:\codes\Volks\Guideline\src\Guideline.Application\bin\Debug\netcoreapp3.1\Guideline.Infra.Data.dll
+C:\codes\Volks\Guideline\src\Guideline.Application\bin\Debug\netcoreapp3.1\Guideline.Domain.pdb
+C:\codes\Volks\Guideline\src\Guideline.Application\bin\Debug\netcoreapp3.1\Guideline.Infra.Data.pdb
+C:\codes\Volks\Guideline\src\Guideline.Application\obj\Debug\netcoreapp3.1\Guideline.Application.csprojAssemblyReference.cache
+C:\codes\Volks\Guideline\src\Guideline.Application\obj\Debug\netcoreapp3.1\Guideline.Application.AssemblyInfoInputs.cache
+C:\codes\Volks\Guideline\src\Guideline.Application\obj\Debug\netcoreapp3.1\Guideline.Application.AssemblyInfo.cs
+C:\codes\Volks\Guideline\src\Guideline.Application\obj\Debug\netcoreapp3.1\Guideline.Application.csproj.CoreCompileInputs.cache
+C:\codes\Volks\Guideline\src\Guideline.Application\obj\Debug\netcoreapp3.1\Guideline.Application.csproj.CopyComplete
+C:\codes\Volks\Guideline\src\Guideline.Application\obj\Debug\netcoreapp3.1\Guideline.Application.dll
+C:\codes\Volks\Guideline\src\Guideline.Application\obj\Debug\netcoreapp3.1\Guideline.Application.pdb
