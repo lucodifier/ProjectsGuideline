@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Guideline.Api.Controllers
 {
-    [Authorize]    
+    [Authorize]
     public abstract class ApiController<TController> : ControllerBase
     {
         private readonly ICollection<string> _errors = new List<string>();
@@ -31,12 +31,6 @@ namespace Guideline.Api.Controllers
         {
             _requestId = Guid.NewGuid().ToString();
             _logger = logger;
-        }
-
-        private IActionResult MakeResponse(IActionResult result)
-        {
-            Response.Headers.Add("X-Request-Id", _requestId);
-            return result;
         }
 
         protected ActionResult CustomResponse<T>(object result = null)

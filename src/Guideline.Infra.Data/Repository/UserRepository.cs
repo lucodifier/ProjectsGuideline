@@ -45,7 +45,7 @@ namespace Guideline.Infra.Data.Repository
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                return await connection.QueryFirstOrDefaultAsync<User>($"{UserQuery.SELECT} WHERE [lOGIN] = @login AND [pass] = @pass", new { login = login, pass = pass });
+                return await connection.QueryFirstOrDefaultAsync<User>($"{UserQuery.SELECT} WHERE [login] = @login AND [pass] = @pass", new { login = login, pass = pass });
             }
         }
 

@@ -1,6 +1,4 @@
 ﻿using FluentValidation.Results;
-using Guideline.Api.Exceptions;
-using Guideline.Application.Enum;
 using Guideline.Application.Interfaces;
 using Guideline.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -40,24 +38,8 @@ namespace Guideline.Api.Controllers
                 return CustomExceptionResponse(ex);
             }
         }
+        
 
-        [AllowAnonymous]
-        [HttpPost, Route("login")]
-        public async Task<IActionResult> Post([FromBody] LoginUserViewModel request)
-        {
-            try
-            {
-                if (!ModelState.IsValid) return CustomResponse(ModelState);
-
-                return CustomResponse<IViewModel>(await _userService.Get(request.Login, request.Pass));
-            }
-            catch (Exception ex)
-            {
-                return CustomExceptionResponse(ex);
-            }
-        }
-
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] string id)
         {
@@ -71,7 +53,6 @@ namespace Guideline.Api.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -85,7 +66,6 @@ namespace Guideline.Api.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateUserViewModel request)
         {
@@ -101,7 +81,6 @@ namespace Guideline.Api.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {

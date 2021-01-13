@@ -26,6 +26,7 @@ namespace Guideline.Infra.CrossCutting.Ioc
         private static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITokenService, TokenService>();
         }
 
         private static void RegisterRepositories(this IServiceCollection services)
