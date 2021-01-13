@@ -61,7 +61,3 @@ C:\codes\Volks\Guideline\src\Guideline.Api\bin\Debug\netcoreapp3.1\FluentValidat
 C:\codes\Volks\Guideline\src\Guideline.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\codes\Volks\Guideline\src\Guideline.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\codes\Volks\Guideline\src\Guideline.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
-C:\codes\Volks\Guideline\src\Guideline.Api\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
-C:\codes\Volks\Guideline\src\Guideline.Api\bin\Debug\netcoreapp3.1\System.Web.Http.dll
-C:\codes\Volks\Guideline\src\Guideline.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\codes\Volks\Guideline\src\Guideline.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

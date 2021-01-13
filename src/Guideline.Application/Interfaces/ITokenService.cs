@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Guideline.Application.ViewModels;
+using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
 namespace Guideline.Application.Interfaces
@@ -10,6 +11,6 @@ namespace Guideline.Application.Interfaces
             get;
             set;
         }
-        Task<string> GenerateTokenAsync(string login, string pass);
+        Task<TokenViewModel> GenerateTokenAsync(string login, string pass);
     }
 }

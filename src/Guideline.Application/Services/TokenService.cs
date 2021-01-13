@@ -32,7 +32,7 @@ namespace Guideline.Application.Services
             _userRepository = userRepository;
         }
 
-        public async Task<string> GenerateTokenAsync(string login, string pass)
+        public async Task<TokenViewModel> GenerateTokenAsync(string login, string pass)
         {
             var user = await _userRepository.Get(login, pass);           
 
@@ -63,10 +63,10 @@ namespace Guideline.Application.Services
                 };
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-                return tokenHandler.WriteToken(token);
+                return new TokenViewModel(tokenHandler.WriteToken(token));
             }
 
-            return string.Empty;
+            return new TokenViewModel();
         }
 
     }
