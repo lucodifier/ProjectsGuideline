@@ -54,6 +54,11 @@ namespace Guideline.Application.Services
             return _mapper.Map<IEnumerable<UserViewModel>>(await _userRepository.GetWithDocuments());
         }
 
+        public async Task<IEnumerable<UserViewModel>> GetByDocument(string document)
+        {
+            return _mapper.Map<IEnumerable<UserViewModel>>(await _userRepository.GetByDocument(document));
+        }
+
         public async Task<UserViewModel> GetById(Guid id)
         {
             return _mapper.Map<UserViewModel>(await _userRepository.GetById(id));

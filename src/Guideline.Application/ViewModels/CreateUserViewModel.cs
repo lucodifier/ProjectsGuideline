@@ -21,6 +21,9 @@ namespace Guideline.Application.ViewModels
         [DisplayName("E-mail")]
         public string Email { get; set; }
 
+        [DisplayName("Documento")]
+        public string Document { get; set; }
+
         [Required(ErrorMessage = "Senha obrigatória")]
         [DisplayName("Senha")]
         public string Pass { get; set; }

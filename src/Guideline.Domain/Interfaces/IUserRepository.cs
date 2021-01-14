@@ -11,6 +11,7 @@ namespace Guideline.Domain.Interfaces
         Task<User> Get(string login, string pass);
         Task<IEnumerable<User>> GetAll();
         Task<IEnumerable<User>> GetWithDocuments();
+        Task<IEnumerable<User>> GetByDocument(string document);
         Task<User> Add(User user);
         Task<User> Update(User user);
         Task<Guid> Remove(Guid id);

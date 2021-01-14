@@ -65,6 +65,14 @@ namespace Guideline.Infra.Data.Repository
             }
         }
 
+        public async Task<IEnumerable<User>> GetByDocument(string document)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                return await connection.QueryAsync<User>(UserQuery.SELECTUSERBYDOCUMENT, new { document = document });
+            }
+        }
+
         public async Task<User> GetById(Guid id)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

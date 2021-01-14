@@ -73,7 +73,7 @@ namespace Guideline.Api.Controllers
 
             if (typeof(T) == typeof(IViewModel))
             {
-                return Created(Request.Path, result);
+                return Ok(result);
             }
 
             if (typeof(T) == typeof(Guid))

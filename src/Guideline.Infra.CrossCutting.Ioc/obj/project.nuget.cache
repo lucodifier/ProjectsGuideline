@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "BB4CHrJKtrn/1ANHCzrkVsvYWdZUJO+sR2WbsD5P/pLks8HNEUYPJ0Xs8CC3FRo4MCz0biNJZUPVrJi2RBsG0g==",
+  "dgSpecHash": "3VbIcmkQw5GpStxUKrIlK8pnvIGg0ihXR96AB7nDaDbewaE+BQpKeBX3M0OGIA+Bvpk3jxtJJ74cH1FQbHTMyQ==",
   "success": true,
   "projectFilePath": "C:\\codes\\Volks\\Guideline\\src\\Guideline.Infra.CrossCutting.Ioc\\Guideline.Infra.CrossCutting.Ioc.csproj",
   "expectedPackageFiles": [

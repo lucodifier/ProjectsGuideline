@@ -81,6 +81,19 @@ namespace Guideline.Api.Controllers
             }
         }
 
+        [HttpGet, Route("document/@document")]
+        public async Task<IActionResult> GetWithDocuments(string document)
+        {
+            try
+            {
+                return CustomResponse<IEnumerable<IViewModel>>(await _userService.GetByDocument(document));
+            }
+            catch (Exception ex)
+            {
+                return CustomExceptionResponse(ex);
+            }
+        }
+
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateUserViewModel request)
         {

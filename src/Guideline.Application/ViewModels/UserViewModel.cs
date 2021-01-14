@@ -23,5 +23,8 @@ namespace Guideline.Application.ViewModels
         [EmailAddress]
         [DisplayName("E-mail")]
         public string Email { get; set; }
+
+        [DisplayName("Documento")]
+        public string Document { get; set; }
     }
 }
