@@ -256,3 +256,7 @@ paket-files/
 /3-Middleware/API/LTM.Enterprise.Admin.API/Scripts
 
 .axoCover
+.dtbcache.v2
+.suo
+.vs
+.vscode
