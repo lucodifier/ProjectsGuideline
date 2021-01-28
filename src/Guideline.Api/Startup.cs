@@ -1,4 +1,3 @@
-using FluentValidation.AspNetCore;
 using Guideline.Api.Midlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,23 +29,14 @@ namespace Guideline.Api
             services.AddHttpContextAccessor();
             services.ConfigureIocDI();
             services.AddControllers();
-            services.ConfigureSwagger();   
-            services.AddMvc()
-            .AddFluentValidation(options =>
-            {
-                options.RegisterValidatorsFromAssemblyContaining<Startup>();
-            });
+            services.ConfigureSwagger();
+            services.ConfigureFluent();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Guideline.Api v1"));
-            }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Guideline.Api v1"));
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("CorsPolicy");

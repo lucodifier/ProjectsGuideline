@@ -32,29 +32,9 @@ namespace Guideline.Api.Controllers
             _logger = logger;
         }
 
-        protected ActionResult CustomResponse<T>(object result = null)
+        protected ActionResult CustomResponse<T>(object result = null, string createdUri = null)
         {
             Response.Headers.Add("X-Request-Id", _requestId);
-
-            if (typeof(T) == typeof(ValidationResult))
-            {
-                var validationResult = (ValidationResultViewModel)result;
-                
-                if (validationResult.Validation.IsValid)
-                    return Created(Request.Path, result);
-                else
-                {
-                    foreach (var error in validationResult.Validation.Errors)
-                    {
-                        _errors.Add(error.ErrorMessage);
-                    }
-
-                    return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
-                    {
-                        { "errors", _errors.ToArray() }
-                    }));
-                }
-            }
 
             if (result == null)
                 return NoContent();
@@ -74,6 +54,11 @@ namespace Guideline.Api.Controllers
             if (typeof(T) == typeof(IViewModel))
             {
                 return Ok(result);
+            }
+
+            if (typeof(T) == typeof(ICreatedViewModel))
+            {
+                return Created(createdUri, result);
             }
 
             if (typeof(T) == typeof(Guid))
@@ -100,6 +85,8 @@ namespace Guideline.Api.Controllers
 
         protected ActionResult CustomResponse(ModelStateDictionary modelState)
         {
+            Response.Headers.Add("X-Request-Id", _requestId);
+
             var errors = modelState.Values.SelectMany(e => e.Errors);
             foreach (var error in errors)
             {

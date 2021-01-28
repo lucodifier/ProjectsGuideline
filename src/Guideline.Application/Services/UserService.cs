@@ -23,19 +23,11 @@ namespace Guideline.Application.Services
             _userRepository = userRepository;
         }
 
-        public async Task<ValidationResultViewModel> Create(CreateUserViewModel createUserViewModel)
+        public async Task<CreatedUserViewModel> Create(CreateUserViewModel createUserViewModel)
         {
-            var validator = new CreateUserValidation();
-            var result = await validator.ValidateAsync(createUserViewModel);
-            var validationResult = new ValidationResultViewModel(result);
-            if (result.IsValid)
-            {
-                var registerUser = _mapper.Map<User>(createUserViewModel);
-                var created = await _userRepository.Add(registerUser);
-                validationResult.Id = created.Id;
-            }
-
-            return validationResult;
+            var registerUser = _mapper.Map<User>(createUserViewModel);
+            var created = await _userRepository.Add(registerUser);
+            return _mapper.Map<CreatedUserViewModel>(created);
         }
 
         public async Task<UserViewModel> Get(string login, string pass)
@@ -82,6 +74,6 @@ namespace Guideline.Application.Services
         public async Task<Guid> Remove(Guid id)
         {
             return await _userRepository.Remove(id);
-        }        
+        }
     }
 }

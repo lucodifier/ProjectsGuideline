@@ -13,7 +13,7 @@ namespace Guideline.Application.Interfaces
         Task<IEnumerable<UserViewModel>> GetWithDocument();
         Task<IEnumerable<UserViewModel>> GetByDocument(string document);
         Task<UserViewModel> GetById(Guid id);
-        Task<ValidationResultViewModel> Create(CreateUserViewModel createUserViewModel);
+        Task<CreatedUserViewModel> Create(CreateUserViewModel createUserViewModel);
         Task<ValidationResultViewModel> Update(UpdateUserViewModel updateUserViewModel);
         Task<Guid> Remove(Guid id);
     }

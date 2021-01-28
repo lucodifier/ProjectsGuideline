@@ -7,17 +7,26 @@ namespace Guideline.Application.Validation
     {
         public CreateUserValidation()
         {
-            RuleFor(c => c.Name)
-               .NotEmpty().WithMessage("Por favor preencha o nome")
-               .Length(2, 150).WithMessage("O nome precisa ter de 2 a 150 caracteres");
+            RuleFor(v => v.Name)
+               .NotEmpty().WithMessage("Por favor preencha o nome");
 
-            RuleFor(c => c.Login)
-               .NotEmpty().WithMessage("Por favor preencha o login")
-               .Length(4, 30).WithMessage("O login precisa ter de 4 a 30 caracteres");
+            RuleFor(v => v.Name)
+               .Length(2, 150).WithMessage("O nome precisa ter de 2 a 150 caracteres")
+               .When(v => !string.IsNullOrEmpty(v.Name));
 
-            RuleFor(c => c.Pass)
-               .NotEmpty().WithMessage("Por favor preencha a senha")
-               .Length(4, 10).WithMessage("A senha precisa ter de 4 a 10 caracteres");
+            RuleFor(v => v.Login)
+               .NotEmpty().WithMessage("Por favor preencha o login");
+
+            RuleFor(v => v.Login)
+               .Length(4, 30).WithMessage("O login precisa ter de 4 a 30 caracteres")
+               .When(v => !string.IsNullOrEmpty(v.Login));
+
+            RuleFor(v => v.Pass)
+               .NotEmpty().WithMessage("Por favor preencha a senha");
+
+            RuleFor(v => v.Pass)
+               .Length(4, 10).WithMessage("A senha precisa ter de 4 a 10 caracteres")
+               .When(v => !string.IsNullOrEmpty(v.Pass));
 
             RuleFor(c => c.Email)
                .NotEmpty()

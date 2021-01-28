@@ -23,6 +23,21 @@ namespace Guideline.Api.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Cria um usuário.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de request:
+        /// 
+        ///     POST api/v1/user
+        ///     {        
+        ///       "name": "Mike",
+        ///       "login": "Mike",
+        ///       "email": "mike@mail.com",
+        ///       "document": "68548478544",
+        ///       "pass": "Fsd545$g"
+        ///     }
+        /// </remarks>
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateUserViewModel request)
@@ -32,7 +47,7 @@ namespace Guideline.Api.Controllers
                 if (!ModelState.IsValid) return CustomResponse(ModelState);
                 var result = await _userService.Create(request);
 
-                return CustomResponse<ValidationResult>(result);
+                return CustomResponse<ICreatedViewModel>(result, "user");
             }
             catch (Exception ex)
             {
@@ -68,7 +83,7 @@ namespace Guideline.Api.Controllers
         }
 
 
-        [HttpGet, Route("withDocuments")]
+        [HttpGet, Route("with-documents")]
         public async Task<IActionResult> GetWithDocuments()
         {
             try
