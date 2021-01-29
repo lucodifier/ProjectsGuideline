@@ -1,6 +1,6 @@
 ﻿namespace Guideline.Application.ViewModels
 {
-    public  class CreateUserViewModel : ICreatedViewModel
+    public  class CreateUserViewModel : IViewModel
     {
         public string Name { get; set; }
       

@@ -44,7 +44,7 @@ namespace Guideline.Api.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return CustomResponse(ModelState);
+                if (!ModelState.IsValid) return CustomValidationResponse(ModelState);
                 var result = await _userService.Create(request);
 
                 return CustomResponse<ICreatedViewModel>(result, "user");
@@ -114,9 +114,9 @@ namespace Guideline.Api.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return CustomResponse(ModelState);
+                if (!ModelState.IsValid) return CustomValidationResponse(ModelState);
 
-                return CustomResponse<ValidationResult>(await _userService.Update(request));
+                return CustomResponse<ICreatedViewModel>(await _userService.Update(request));
             }
             catch (Exception ex)
             {

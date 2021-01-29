@@ -83,7 +83,7 @@ namespace Guideline.Api.Controllers
             }));
         }
 
-        protected ActionResult CustomResponse(ModelStateDictionary modelState)
+        protected ActionResult CustomValidationResponse(ModelStateDictionary modelState)
         {
             Response.Headers.Add("X-Request-Id", _requestId);
 

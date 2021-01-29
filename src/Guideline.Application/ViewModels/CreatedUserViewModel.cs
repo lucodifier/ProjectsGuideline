@@ -2,7 +2,7 @@
 
 namespace Guideline.Application.ViewModels
 {
-    public class CreatedUserViewModel : IViewModel
+    public class CreatedUserViewModel : ICreatedViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
