@@ -260,3 +260,6 @@ paket-files/
 .suo
 .vs
 .vscode
+./.dtbcache.v2
+./v16/.suo
+
