@@ -1,9 +1,11 @@
 ﻿using Guideline.Application.Interfaces;
+using Guideline.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace Guideline.Api.Controllers
@@ -23,12 +25,22 @@ namespace Guideline.Api.Controllers
             _tokenService.Configuration = config;
         }
 
+
+        /// <summary>
+        /// Gerar token a partir de usuário e senha
+        /// </summary>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Get([FromHeader] string login, [FromHeader] string pass)
+        public async Task<IActionResult> GetAsync([FromHeader] string login, [FromHeader] string pass)
         {
-            var result = await _tokenService.GenerateTokenAsync(login, pass);
-            return Ok(result);
+            try
+            {
+                return CustomResponse<IResponse>(await _tokenService.GenerateTokenAsync(login, pass));
+            }
+            catch (Exception ex)
+            {
+                return CustomExceptionResponse(ex);
+            }
         }
 
     }

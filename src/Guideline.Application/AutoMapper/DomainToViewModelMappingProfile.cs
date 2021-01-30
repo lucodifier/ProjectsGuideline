@@ -8,8 +8,8 @@ namespace Guideline.Application.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            CreateMap<User, UserViewModel>();
-            CreateMap<User, CreatedUserViewModel > ();
+            CreateMap<User, UserResponse>();
+            CreateMap<User, CreatedUserResponse > ();
             
         }
     }

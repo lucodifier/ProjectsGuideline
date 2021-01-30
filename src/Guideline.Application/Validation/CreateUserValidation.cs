@@ -3,7 +3,7 @@ using Guideline.Application.ViewModels;
 
 namespace Guideline.Application.Validation
 {
-    public class CreateUserValidation : AbstractValidator<CreateUserViewModel>
+    public class CreateUserValidation : AbstractValidator<CreateUserRequest>
     {
         public CreateUserValidation()
         {

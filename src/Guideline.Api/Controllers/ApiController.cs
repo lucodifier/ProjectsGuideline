@@ -1,4 +1,5 @@
 ﻿using Guideline.Application.ViewModels;
+using Guideline.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,31 +18,29 @@ namespace Guideline.Api.Controllers
 
         protected readonly ILogger<TController> _logger;
         protected readonly IHttpContextAccessor _httpContextAccessor;
-        protected readonly string _requestId;
 
         public ApiController(IHttpContextAccessor httpContextAccessor, ILogger<TController> logger)
         {
             _httpContextAccessor = httpContextAccessor;
-            _requestId = Guid.NewGuid().ToString();
             _logger = logger;
         }
 
         public ApiController(ILogger<TController> logger)
         {
-            _requestId = Guid.NewGuid().ToString();
             _logger = logger;
         }
 
         protected ActionResult CustomResponse<T>(object result = null, string createdUri = null)
         {
-            Response.Headers.Add("X-Request-Id", _requestId);
+            if (!Response.Headers.ContainsKey("X-Request-Id"))
+                Response.Headers.Add("X-Request-Id", Guid.NewGuid().ToString());
 
             if (result == null)
                 return NoContent();
 
-            if (typeof(T) == typeof(IEnumerable<IViewModel>))
+            if (typeof(T) == typeof(IEnumerable<IResponse>))
             {
-                if (((IEnumerable<IViewModel>)result).Count() == 0)
+                if (((IEnumerable<IResponse>)result).Count() == 0)
                 {
                     return NotFound(result);
                 }
@@ -51,12 +50,12 @@ namespace Guideline.Api.Controllers
                 }
             }
 
-            if (typeof(T) == typeof(IViewModel))
+            if (typeof(T) == typeof(IResponse))
             {
                 return Ok(result);
             }
 
-            if (typeof(T) == typeof(ICreatedViewModel))
+            if (typeof(T) == typeof(ICreatedResponse))
             {
                 return Created(createdUri, result);
             }
@@ -71,32 +70,41 @@ namespace Guideline.Api.Controllers
 
         protected ActionResult CustomExceptionResponse(Exception exception)
         {
-            Response.Headers.Add("X-Request-Id", _requestId);
+            var requestId = Guid.NewGuid().ToString();
+            if (!Response.Headers.ContainsKey("X-Request-Id"))
+                Response.Headers.Add("X-Request-Id", requestId);
 
-            _logger.LogError($"{_requestId} :: {exception.Message} :: {exception.StackTrace}");
+            _logger.LogError($"{requestId} :: {exception.Message} :: {exception.StackTrace}");
 
             AddError(exception.Message);
 
-            return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
+            var problemDetails = new ValidationProblemDetails(new Dictionary<string, string[]>
             {
                 { "errors", _errors.ToArray() }
-            }));
+            });
+            problemDetails.Title = ApplicationMessages.RESPONSE_ERROR;
+
+            return BadRequest(problemDetails);
         }
 
         protected ActionResult CustomValidationResponse(ModelStateDictionary modelState)
         {
-            Response.Headers.Add("X-Request-Id", _requestId);
+            if (!Response.Headers.ContainsKey("X-Request-Id"))
+                Response.Headers.Add("X-Request-Id", Guid.NewGuid().ToString());
 
             var errors = modelState.Values.SelectMany(e => e.Errors);
             foreach (var error in errors)
             {
                 AddError(error.ErrorMessage);
             }
-           
-            return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
+
+            var problemDetails = new ValidationProblemDetails(new Dictionary<string, string[]>
             {
                 { "errors", _errors.ToArray() }
-            }));
+            });
+            problemDetails.Title = ApplicationMessages.VALIDATIONS_TITLE;
+
+            return BadRequest(problemDetails);
         }
 
         protected void AddError(string erro)
@@ -104,11 +112,11 @@ namespace Guideline.Api.Controllers
             _errors.Add(erro);
         }
 
-        protected UserViewModel GetContextUser()
+        protected UserResponse GetContextUser()
         {
             if (User.FindFirst("Id").Value != null)
             {
-                var user = new UserViewModel();
+                var user = new UserResponse();
                 user.Id = new Guid(User.FindFirst("Id")?.Value);
                 user.Login = User.FindFirst("Login")?.Value;
                 user.Email = User.FindFirst("Email")?.Value;

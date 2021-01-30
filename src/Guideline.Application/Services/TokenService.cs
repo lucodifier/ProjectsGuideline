@@ -32,13 +32,13 @@ namespace Guideline.Application.Services
             _userRepository = userRepository;
         }
 
-        public async Task<TokenViewModel> GenerateTokenAsync(string login, string pass)
+        public async Task<TokenResponse> GenerateTokenAsync(string login, string pass)
         {
-            var user = await _userRepository.Get(login, pass);           
+            var user = await _userRepository.GetByLoginAsync(login, pass);           
 
             if (user != null)
             {
-                var userViewModel = _mapper.Map<UserViewModel>(user);
+                var userViewModel = _mapper.Map<UserResponse>(user);
 
                 var _secret = Configuration.GetSection("JwtSettings").GetSection("secret").Value;
                 var _expDate = DateTime.UtcNow.AddMinutes(double.Parse(Configuration.GetSection("JwtSettings").GetSection("expiration").Value));
@@ -63,10 +63,10 @@ namespace Guideline.Application.Services
                 };
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-                return new TokenViewModel(tokenHandler.WriteToken(token));
+                return new TokenResponse(tokenHandler.WriteToken(token));
             }
 
-            return new TokenViewModel();
+            return new TokenResponse();
         }
 
     }

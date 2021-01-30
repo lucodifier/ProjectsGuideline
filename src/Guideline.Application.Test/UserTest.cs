@@ -8,7 +8,9 @@ using Guideline.Domain.Configuration;
 using Guideline.Domain.Entities;
 using Guideline.Domain.Interfaces;
 using Guideline.Infra.Data.Repository;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using Xunit;
 
@@ -20,6 +22,7 @@ namespace Guideline.Application.Test
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _cache;
 
         public UserTest()
         {
@@ -28,40 +31,45 @@ namespace Guideline.Application.Test
 
             var mapperConfiguration = new MapperConfiguration(config =>
             {
-                config.CreateMap<CreateUserViewModel, User>();
-                config.CreateMap<UpdateUserViewModel, User>();
-                config.CreateMap<LoginUserViewModel, User>();
-                config.CreateMap<User, UserViewModel>();
+                config.CreateMap<CreateUserRequest, User>();
+                config.CreateMap<UpdateUserRequest, User>();
+                config.CreateMap<User, UserResponse>();
             });
             _mapper = mapperConfiguration.CreateMapper();
 
-            _userService = new UserService(_mapper, _userRepository );
+            var services = new ServiceCollection();
+            services.AddMemoryCache();
+            var serviceProvider = services.BuildServiceProvider();
+
+            var memoryCache = serviceProvider.GetService<IMemoryCache>();
+
+            _userService = new UserService(_mapper, memoryCache, _userRepository);
         }
 
         [Fact]
         public void CreateUser()
         {
-            var user = new CreateUserViewModel();
+            var user = new CreateUserRequest();
             user.Email = "usertest@test.com";
             user.Login = "usertest";
             user.Pass = "usertest";
             user.Name = "usertest";
-            var result = _userService.Create(user).Result;
+            var result = _userService.CreateAsync(user).Result;
             Assert.NotNull(result);
         }
 
         [Fact]
         public void GetAll()
         {
-            var result = _userService.GetAll().Result;
+            var result = _userService.GetAllAsync().Result;
             Assert.NotNull(result);
         }
 
         [Fact]
         public void GetById()
         {
-            var id = new Guid("");
-            var result = _userService.GetById(id).Result;
+            var id = new Guid("DFCFC6BD-D0D6-4D52-BA68-BF1C5DA1B3DF");
+            var result = _userService.GetByIdAsync(id).Result;
             Assert.NotNull(result);
         }
 
@@ -77,12 +85,12 @@ namespace Guideline.Application.Test
         [Fact]
         public void Update()
         {
-            var user = new UpdateUserViewModel();
+            var user = new UpdateUserRequest();
             user.Id = new Guid("");
             user.Email = "usertest@test.com";
             user.Login = "usertest";
             user.Name = "usertest";
-            var result = _userService.Update(user).Result;
+            var result = _userService.UpdateAsync(user).Result;
             Assert.NotNull(result);
         }
 
@@ -90,7 +98,7 @@ namespace Guideline.Application.Test
         public void Remove()
         {
             var id = new Guid("");
-            var result = _userService.Remove(id).Result;
+            var result = _userService.RemoveAsync(id).Result;
             Assert.NotNull(result);
         }
     }

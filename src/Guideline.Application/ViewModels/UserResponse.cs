@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Guideline.Application.ViewModels
 {
-    public class UpdateUserViewModel : IViewModel
+    public class UserResponse : IResponse
     {
-        [Required(ErrorMessage = "Id obrigatório")]
+        [Key]
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Nome obrigatório")]
@@ -16,7 +16,6 @@ namespace Guideline.Application.ViewModels
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Login obrigatório")]
-        [EmailAddress]
         [DisplayName("Login")]
         public string Login { get; set; }
 
@@ -24,6 +23,8 @@ namespace Guideline.Application.ViewModels
         [EmailAddress]
         [DisplayName("E-mail")]
         public string Email { get; set; }
-        
+
+        [DisplayName("Documento")]
+        public string Document { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Guideline.Domain.Configuration;
 using Guideline.Domain.Entities;
 using Guideline.Domain.Interfaces;
 using Guideline.Infra.Data.Queries;
@@ -22,7 +21,7 @@ namespace Guideline.Infra.Data.Repository
             _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
 
-        public async Task<User> Add(User user)
+        public async Task<User> CreateAsync(User user)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -41,7 +40,7 @@ namespace Guideline.Infra.Data.Repository
             return user;
         }
 
-        public async Task<User> Get(string login, string pass)
+        public async Task<User> GetByLoginAsync(string login, string pass)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -49,7 +48,7 @@ namespace Guideline.Infra.Data.Repository
             }
         }
 
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -57,7 +56,7 @@ namespace Guideline.Infra.Data.Repository
             }
         }
 
-        public async Task<IEnumerable<User>> GetWithDocuments()
+        public async Task<IEnumerable<User>> GetWithDocumentsAsync()
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -65,7 +64,7 @@ namespace Guideline.Infra.Data.Repository
             }
         }
 
-        public async Task<IEnumerable<User>> GetByDocument(string document)
+        public async Task<IEnumerable<User>> GetByDocumentAsync(string document)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -73,7 +72,7 @@ namespace Guideline.Infra.Data.Repository
             }
         }
 
-        public async Task<User> GetById(Guid id)
+        public async Task<User> GetByIdAsync(Guid id)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -81,7 +80,7 @@ namespace Guideline.Infra.Data.Repository
             }
         }
 
-        public async Task<Guid> Remove(Guid id)
+        public async Task<Guid> RemoveAsync(Guid id)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -91,7 +90,7 @@ namespace Guideline.Infra.Data.Repository
             }
         }
 
-        public async Task<User> Update(User user)
+        public async Task<User> UpdateAsync(User user)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {

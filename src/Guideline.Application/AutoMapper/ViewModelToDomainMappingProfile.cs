@@ -8,9 +8,9 @@ namespace Guideline.Application.AutoMapper
     {
         public ViewModelToDomainMappingProfile()
         {
-            CreateMap<CreateUserViewModel, User>();
-            CreateMap<UserViewModel, User>();
-            CreateMap<UpdateUserViewModel, User>();
+            CreateMap<CreateUserRequest, User>();
+            CreateMap<UserResponse, User>();
+            CreateMap<UpdateUserRequest, User>();
         }
     }
 }

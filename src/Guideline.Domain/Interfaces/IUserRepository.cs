@@ -7,13 +7,13 @@ namespace Guideline.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User> GetById(Guid id);
-        Task<User> Get(string login, string pass);
-        Task<IEnumerable<User>> GetAll();
-        Task<IEnumerable<User>> GetWithDocuments();
-        Task<IEnumerable<User>> GetByDocument(string document);
-        Task<User> Add(User user);
-        Task<User> Update(User user);
-        Task<Guid> Remove(Guid id);
+        Task<User> GetByIdAsync(Guid id);
+        Task<User> GetByLoginAsync(string login, string pass);
+        Task<IEnumerable<User>> GetAllAsync();
+        Task<IEnumerable<User>> GetWithDocumentsAsync();
+        Task<IEnumerable<User>> GetByDocumentAsync(string document);
+        Task<User> CreateAsync(User user);
+        Task<User> UpdateAsync(User user);
+        Task<Guid> RemoveAsync(Guid id);
     }
 }

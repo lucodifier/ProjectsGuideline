@@ -11,6 +11,6 @@ namespace Guideline.Application.Interfaces
             get;
             set;
         }
-        Task<TokenViewModel> GenerateTokenAsync(string login, string pass);
+        Task<TokenResponse> GenerateTokenAsync(string login, string pass);
     }
 }

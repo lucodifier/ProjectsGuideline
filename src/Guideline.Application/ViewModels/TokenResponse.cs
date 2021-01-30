@@ -1,10 +1,10 @@
 ﻿namespace Guideline.Application.ViewModels
 {
-    public class TokenViewModel
+    public class TokenResponse : IResponse
     {
         public string Token { get; set; }
 
-        public TokenViewModel(string token = null)
+        public TokenResponse(string token = null)
         {
             Token = token;
         }

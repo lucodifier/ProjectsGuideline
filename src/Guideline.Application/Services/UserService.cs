@@ -27,73 +27,81 @@ namespace Guideline.Application.Services
             _userRepository = userRepository;
         }
 
-        public async Task<CreatedUserViewModel> Create(CreateUserViewModel createUserViewModel)
+        public async Task<CreatedUserResponse> CreateAsync(CreateUserRequest request)
         {
-            var registerUser = _mapper.Map<User>(createUserViewModel);
-            var created = await _userRepository.Add(registerUser);
-            return _mapper.Map<CreatedUserViewModel>(created);
+            var registerUser = _mapper.Map<User>(request);
+            var created = await _userRepository.CreateAsync(registerUser);
+            return _mapper.Map<CreatedUserResponse>(created);
         }
 
-        public async Task<UserViewModel> Get(string login, string pass)
+        public async Task<UserResponse> Get(string login, string pass)
         {
-            var user = await _userRepository.Get(login, pass);
-            return _mapper.Map<UserViewModel>(user);
+            var user = await _userRepository.GetByLoginAsync(login, pass);
+            return _mapper.Map<UserResponse>(user);
         }
 
-        public async Task<IEnumerable<UserViewModel>> GetAll()
+        public async Task<IEnumerable<UserResponse>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<UserViewModel>>(await _userRepository.GetAll());
+            var cacheEntry = _cache.GetOrCreateAsync($"AllUsers", async entry =>
+            {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30);
+                entry.SetPriority(CacheItemPriority.High);
+
+                return _mapper.Map<IEnumerable<UserResponse>>(await _userRepository.GetAllAsync());
+            });
+
+            return await cacheEntry;
         }
 
-        public async Task<IEnumerable<UserViewModel>> GetWithDocument()
+        public async Task<IEnumerable<UserResponse>> GetWithDocumentAsync()
         {
             var cacheEntry = _cache.GetOrCreateAsync($"UserWithDocuments", async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30);
                 entry.SetPriority(CacheItemPriority.High);
 
-                return _mapper.Map<IEnumerable<UserViewModel>>(await _userRepository.GetWithDocuments());
+                return _mapper.Map<IEnumerable<UserResponse>>(await _userRepository.GetWithDocumentsAsync());
             });
 
             return await cacheEntry;
         }
 
-        public async Task<IEnumerable<UserViewModel>> GetByDocument(string document)
+        public async Task<IEnumerable<UserResponse>> GetByDocumentAsync(string document)
         {
-            return _mapper.Map<IEnumerable<UserViewModel>>(await _userRepository.GetByDocument(document));
+            var cacheEntry = _cache.GetOrCreateAsync($"UserByDocument{document}", async entry =>
+            {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30);
+                entry.SetPriority(CacheItemPriority.High);
+
+                return _mapper.Map<IEnumerable<UserResponse>>(await _userRepository.GetByDocumentAsync(document));
+            });
+
+            return await cacheEntry;           
         }
 
-        public async Task<UserViewModel> GetById(Guid id)
+        public async Task<UserResponse> GetByIdAsync(Guid id)
         {
             var cacheEntry = _cache.GetOrCreateAsync($"UserId{id}", async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30);
                 entry.SetPriority(CacheItemPriority.High);
 
-                return _mapper.Map<UserViewModel>(await _userRepository.GetById(id));
+                return _mapper.Map<UserResponse>(await _userRepository.GetByIdAsync(id));
             });
 
             return await cacheEntry;
         }
 
-        public async Task<ValidationResultViewModel> Update(UpdateUserViewModel updateUserViewModel)
+        public async Task<CreatedUserResponse> UpdateAsync(UpdateUserRequest request)
         {
-            var validator = new UpdateUserValidation();
-            var result = await validator.ValidateAsync(updateUserViewModel);
-            var validationResult = new ValidationResultViewModel(result);
-            if (result.IsValid)
-            {
-                var registerUser = _mapper.Map<User>(updateUserViewModel);
-                var updated = await _userRepository.Update(registerUser);
-                validationResult.Id = updated.Id;
-            }
-
-            return validationResult;
+            var registerUser = _mapper.Map<User>(request);
+            var updated = await _userRepository.UpdateAsync(registerUser);
+            return _mapper.Map<CreatedUserResponse>(updated);
         }
 
-        public async Task<Guid> Remove(Guid id)
+        public async Task<Guid> RemoveAsync(Guid id)
         {
-            return await _userRepository.Remove(id);
+            return await _userRepository.RemoveAsync(id);
         }
     }
 }

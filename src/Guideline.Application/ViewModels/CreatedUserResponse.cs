@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Guideline.Domain.Entities
+namespace Guideline.Application.ViewModels
 {
-    public class User
+    public class CreatedUserResponse : ICreatedResponse
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -10,14 +10,5 @@ namespace Guideline.Domain.Entities
         public string Login { get; set; }
         public string Email { get; set; }
         public string Pass { get; set; }
-        public DateTimeOffset Created { get; set; }
-
-        public User()
-        {
-            if (Id == new Guid())
-                Id = Guid.NewGuid();
-
-            Created = DateTimeOffset.Now;
-        }
     }
 }

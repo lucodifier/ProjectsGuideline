@@ -21,7 +21,8 @@ namespace Guideline.Api.Midlewares
            .AddFluentValidation(options =>
            {
                options.RegisterValidatorsFromAssemblyContaining<Startup>();
-               options.RegisterValidatorsFromAssemblyContaining<CreateUserViewModel>();
+               options.RegisterValidatorsFromAssemblyContaining<CreateUserRequest>();
+               options.RegisterValidatorsFromAssemblyContaining<UpdateUserRequest>();
 
            });
         }
@@ -39,29 +40,6 @@ namespace Guideline.Api.Midlewares
 
         public static void ConfigureSwagger(this IServiceCollection services)
         {
-            //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1",
-            //        new OpenApiInfo
-            //        {
-            //            Title = "Guideline.Api",
-            //            Version = "v1",
-            //            Description = "Web API Guideline para demais projetos",
-            //            Contact = new OpenApiContact
-            //            {
-            //                Name = "Guideline Project"
-            //            }
-            //        });
-
-            //    string applicationPath = AppContext.BaseDirectory;
-            //    string applicationName = Assembly.GetEntryAssembly().GetName().Name;
-            //    string xmlDocPath = Path.Combine(applicationPath, $"{applicationName}.xml");
-            //    c.IncludeXmlComments(xmlDocPath);
-            //});
-
             services.AddSwaggerGen(s =>
             {
                 s.SwaggerDoc("v1", new OpenApiInfo { Title = "Guideline.Api", Version = "v1" });
