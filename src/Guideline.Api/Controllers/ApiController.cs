@@ -1,5 +1,5 @@
-﻿using FluentValidation.Results;
-using Guideline.Application.ViewModels;
+﻿using Guideline.Application.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -102,6 +102,21 @@ namespace Guideline.Api.Controllers
         protected void AddError(string erro)
         {
             _errors.Add(erro);
+        }
+
+        protected UserViewModel GetContextUser()
+        {
+            if (User.FindFirst("Id").Value != null)
+            {
+                var user = new UserViewModel();
+                user.Id = new Guid(User.FindFirst("Id")?.Value);
+                user.Login = User.FindFirst("Login")?.Value;
+                user.Email = User.FindFirst("Email")?.Value;
+
+                return user;
+            }
+
+            return null;
         }
     }
 }

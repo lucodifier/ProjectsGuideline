@@ -25,30 +25,28 @@ namespace Guideline.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureCors();
-            services.AddCors();
             services.AddHttpContextAccessor();
             services.ConfigureIocDI();
-            services.AddControllers();
-            services.ConfigureSwagger();
+            services.ConfigureJwtAuthentication(Configuration);
             services.ConfigureFluent();
+            services.ConfigureSwagger();
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Guideline.Api v1"));
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Guideline.Api v1"));
+            }
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("CorsPolicy");
+            app.UseAuthentication();
             app.UseAuthorization();
-
-            // custom jwt auth middleware
-            app.UseMiddleware<JwtMiddleware>();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
