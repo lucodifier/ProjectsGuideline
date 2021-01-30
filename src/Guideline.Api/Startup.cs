@@ -25,11 +25,13 @@ namespace Guideline.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureCors();
+            services.AddResponseCaching();
             services.AddHttpContextAccessor();
             services.ConfigureIocDI();
             services.ConfigureJwtAuthentication(Configuration);
             services.ConfigureFluent();
             services.ConfigureSwagger();
+            services.AddMemoryCache();
             services.AddControllers();
         }
 
@@ -46,6 +48,7 @@ namespace Guideline.Api
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseResponseCaching();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

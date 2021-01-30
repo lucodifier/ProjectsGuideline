@@ -1,5 +1,4 @@
-﻿using FluentValidation.Results;
-using Guideline.Application.Interfaces;
+﻿using Guideline.Application.Interfaces;
 using Guideline.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
