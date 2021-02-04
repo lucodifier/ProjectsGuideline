@@ -15,21 +15,18 @@ namespace Guideline.Application.Services
     public class TokenService : ITokenService
     {
         private IConfiguration _configuration;
-        public IConfiguration Configuration  // read-write instance property
-        {
-            get => _configuration;
-            set => _configuration = value;
-        }
 
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
 
         public TokenService(
+            IConfiguration configuration,
             IMapper mapper,
             IUserRepository userRepository)
         {
             _mapper = mapper;
             _userRepository = userRepository;
+            _configuration = configuration;
         }
 
         public async Task<TokenResponse> GenerateTokenAsync(string login, string pass)
@@ -40,10 +37,10 @@ namespace Guideline.Application.Services
             {
                 var userViewModel = _mapper.Map<UserResponse>(user);
 
-                var _secret = Configuration.GetSection("JwtSettings").GetSection("secret").Value;
-                var _expDate = DateTime.UtcNow.AddMinutes(double.Parse(Configuration.GetSection("JwtSettings").GetSection("expiration").Value));
-                var _audience = Configuration.GetSection("JwtSettings").GetSection("audience").Value;
-                var _issuer = Configuration.GetSection("JwtSettings").GetSection("issuer").Value;
+                var _secret = _configuration.GetSection("JwtSettings").GetSection("secret").Value;
+                var _expDate = DateTime.UtcNow.AddMinutes(double.Parse(_configuration.GetSection("JwtSettings").GetSection("expiration").Value));
+                var _audience = _configuration.GetSection("JwtSettings").GetSection("audience").Value;
+                var _issuer = _configuration.GetSection("JwtSettings").GetSection("issuer").Value;
 
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(_secret);

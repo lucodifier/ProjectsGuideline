@@ -87,6 +87,23 @@ namespace Guideline.Api.Controllers
             return BadRequest(problemDetails);
         }
 
+        protected ActionResult CustomMessageResponse(string message)
+        {
+            var requestId = Guid.NewGuid().ToString();
+            if (!Response.Headers.ContainsKey("X-Request-Id"))
+                Response.Headers.Add("X-Request-Id", requestId);
+
+            AddError(message);
+
+            var problemDetails = new ValidationProblemDetails(new Dictionary<string, string[]>
+            {
+                { "errors", _errors.ToArray() }
+            });
+            problemDetails.Title = ApplicationMessages.VALIDATIONS_TITLE;
+
+            return BadRequest(problemDetails);
+        }
+
         protected ActionResult CustomValidationResponse(ModelStateDictionary modelState)
         {
             if (!Response.Headers.ContainsKey("X-Request-Id"))

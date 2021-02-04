@@ -63,6 +63,9 @@ namespace Guideline.Api.Controllers
         {
             try
             {
+                if (string.IsNullOrEmpty(id))
+                    return CustomMessageResponse("Id obrigatório");
+
                 return CustomResponse<IResponse>(await _userService.GetByIdAsync(new Guid(id)));
             }
             catch (Exception ex)
@@ -111,6 +114,9 @@ namespace Guideline.Api.Controllers
         {
             try
             {
+                if (string.IsNullOrEmpty(document))
+                    return CustomMessageResponse("Documento obrigatório");
+
                 return CustomResponse<IEnumerable<IResponse>>(await _userService.GetByDocumentAsync(document));
             }
             catch (Exception ex)

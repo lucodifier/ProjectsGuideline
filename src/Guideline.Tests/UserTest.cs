@@ -1,20 +1,18 @@
 using AutoMapper;
-using Guideline.Application.Configuration;
 using Guideline.Application.Interfaces;
 using Guideline.Application.Services;
-using Guideline.Application.Tests;
 using Guideline.Application.ViewModels;
-using Guideline.Domain.Configuration;
 using Guideline.Domain.Entities;
 using Guideline.Domain.Interfaces;
 using Guideline.Infra.Data.Repository;
+using Guideline.Tests;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Xunit;
 
-namespace Guideline.Application.Test
+namespace Guideline.Test
 {
     public class UserTest
     {

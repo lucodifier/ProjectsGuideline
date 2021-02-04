@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Guideline.Application.Tests
+namespace Guideline.Tests
 {
     public class Setting
     {

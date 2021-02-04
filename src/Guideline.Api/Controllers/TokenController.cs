@@ -3,7 +3,6 @@ using Guideline.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -18,11 +17,9 @@ namespace Guideline.Api.Controllers
 
         public TokenController(IHttpContextAccessor httpContextAccessor,
            ILogger<TokenController> logger,
-           IConfiguration config,
            ITokenService tokenService) : base(httpContextAccessor, logger)
         {
-            _tokenService = tokenService;
-            _tokenService.Configuration = config;
+            _tokenService = tokenService;            
         }
 
 
