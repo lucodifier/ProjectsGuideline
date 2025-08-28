@@ -1,4 +1,4 @@
-Projeto Guideline
+Guideline de projeto Visual Studio | Clean Code | DDD (defasado)
 =====================
 A proposta deste projeto/Solution é definir uma diretriz para projetos .net Core API.
 
