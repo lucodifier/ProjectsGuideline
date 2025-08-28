@@ -1,45 +1,69 @@
-Guideline de projeto Visual Studio | Clean Code | DDD (defasado)
-=====================
-A proposta deste projeto/Solution é definir uma diretriz para projetos .net Core API.
+Guideline de Projeto Visual Studio | Clean Code | DDD
+⚠️ Este projeto está defasado, mas ainda serve como referência para diretrizes de arquitetura em APIs .NET Core.
 
-Definido com uma arquitetura em Camadas:
+🎯 Propósito
+Definir uma diretriz para projetos .NET Core API utilizando uma arquitetura em camadas, princípios de Clean Code e DDD.
 
-*API
-*Application
-*Domain (DDD)
-*Infra
- -Data
- -CrossCutting
+🏗️ Arquitetura em Camadas
+📡 API
 
-## Como usar:
-- Você precisará do Visual Studio 2019 e do .NET Core SDK mais recentes.
-- ***Please check if you have installed the same runtime version (SDK) described in global.json***
-- O SDK e as ferramentas mais recentes podem ser baixados em https://dot.net/core.
+🧠 Application
 
-Além disso, você pode executar o Projeto no Visual Studio Code (Windows, Linux ou MacOS).
-Para saber mais sobre como configurar seu ambiente, visite o [Guia de download do Microsoft .NET] (https://www.microsoft.com/net/download)
+🧬 Domain (DDD)
 
-## Technologies implemented:
+🛠️ Infra
 
-- ASP.NET Core 3.1 (with .NET Core 3.1)
- - ASP.NET WebApi Core with JWT Bearer Authentication
-- Dapper
-- .NET Core Native DI
-- AutoMapper
-- FluentValidator
-- MediatR
-- Swagger UI with JWT support
-- .NET DevPack
-- .NET DevPack.Identity
+💾 Data
 
-## Architecture:
+🧰 CrossCutting
 
-- Full architecture with responsibility separation concerns, SOLID and Clean Code
-- Domain Driven Design (Layers and Domain Model Pattern)
-- Domain Events
-- Domain Notification
-- Domain Validations
-- CQRS (Imediate Consistency)
-- Event Sourcing
-- Unit of Work
-- Repository
+🚀 Como Usar
+Instale o Visual Studio 2019 e o .NET Core SDK mais recente.
+
+Verifique se o SDK instalado corresponde à versão descrita no arquivo global.json.
+
+Baixe o SDK e ferramentas em 👉 https://dot.net/core
+
+Também é possível executar o projeto no Visual Studio Code (Windows, Linux ou macOS).
+
+Para configurar seu ambiente, acesse o Guia de Download do Microsoft .NET
+
+🛠️ Tecnologias Implementadas
+🌐 ASP.NET Core 3.1 (com .NET Core 3.1)
+
+🔐 ASP.NET WebApi Core com autenticação JWT Bearer
+
+⚡ Dapper
+
+🧩 .NET Core Native DI
+
+🔄 AutoMapper
+
+✅ FluentValidator
+
+📣 MediatR
+
+🧪 Swagger UI com suporte a JWT
+
+📦 .NET DevPack
+
+🔐 .NET DevPack.Identity
+
+🧱 Arquitetura e Padrões
+🧼 Separação de responsabilidades com princípios SOLID e Clean Code
+
+🧠 Domain Driven Design (camadas e padrão Domain Model)
+
+📢 Eventos de Domínio
+
+🚨 Notificações de Domínio
+
+🧪 Validações de Domínio
+
+⚙️ CQRS (consistência imediata)
+
+🕒 Event Sourcing
+
+🔄 Unit of Work
+
+📁 Repository Pattern
