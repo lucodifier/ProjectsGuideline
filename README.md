@@ -1,69 +1,66 @@
-Guideline de Projeto Visual Studio | Clean Code | DDD
-⚠️ Este projeto está defasado, mas ainda serve como referência para diretrizes de arquitetura em APIs .NET Core.
+# 📘 Guideline de Projeto Visual Studio | Clean Code | DDD
 
-🎯 Propósito
-Definir uma diretriz para projetos .NET Core API utilizando uma arquitetura em camadas, princípios de Clean Code e DDD.
+⚠️ **Status:** Este projeto está defasado, mas ainda serve como referência para diretrizes de arquitetura em APIs .NET Core.
 
-🏗️ Arquitetura em Camadas
-📡 API
+---
 
-🧠 Application
+## 🎯 Propósito
+Definir uma diretriz para projetos **.NET Core API** utilizando:
+- Arquitetura em camadas  
+- Princípios de **Clean Code**  
+- **Domain Driven Design (DDD)**  
 
-🧬 Domain (DDD)
+---
 
-🛠️ Infra
+## 🏗️ Arquitetura em Camadas
 
-💾 Data
+- 📡 **API**  
+- 🧠 **Application**  
+- 🧬 **Domain (DDD)**  
+- 🛠️ **Infra**  
+- 💾 **Data**  
+- 🧰 **CrossCutting**  
 
-🧰 CrossCutting
+---
 
-🚀 Como Usar
-Instale o Visual Studio 2019 e o .NET Core SDK mais recente.
+## 🚀 Como Usar
 
-Verifique se o SDK instalado corresponde à versão descrita no arquivo global.json.
+1. Instale o **Visual Studio 2019** e o **.NET Core SDK** mais recente.  
+2. Verifique se o SDK instalado corresponde à versão descrita no arquivo **`global.json`**.  
+3. Baixe o SDK e ferramentas em 👉 [https://dot.net/core](https://dot.net/core).  
+4. Também é possível executar no **Visual Studio Code** (Windows, Linux ou macOS).  
 
-Baixe o SDK e ferramentas em 👉 https://dot.net/core
+📖 Consulte o **[Guia de Download do Microsoft .NET](https://dot.net/core)** para configurar seu ambiente.
 
-Também é possível executar o projeto no Visual Studio Code (Windows, Linux ou macOS).
+---
 
-Para configurar seu ambiente, acesse o Guia de Download do Microsoft .NET
+## 🛠️ Tecnologias Implementadas
 
-🛠️ Tecnologias Implementadas
-🌐 ASP.NET Core 3.1 (com .NET Core 3.1)
+- 🌐 **ASP.NET Core 3.1**  
+- 🔐 **ASP.NET WebApi Core** com autenticação **JWT Bearer**  
+- ⚡ **Dapper**  
+- 🧩 **.NET Core Native DI**  
+- 🔄 **AutoMapper**  
+- ✅ **FluentValidator**  
+- 📣 **MediatR**  
+- 🧪 **Swagger UI** com suporte a JWT  
+- 📦 **.NET DevPack**  
+- 🔐 **.NET DevPack.Identity**  
 
-🔐 ASP.NET WebApi Core com autenticação JWT Bearer
+---
 
-⚡ Dapper
+## 🧱 Arquitetura e Padrões
 
-🧩 .NET Core Native DI
+- 🧼 Separação de responsabilidades (**SOLID + Clean Code**)  
+- 🧠 **Domain Driven Design (DDD)** — camadas e padrão **Domain Model**  
+- 📢 **Eventos de Domínio**  
+- 🚨 **Notificações de Domínio**  
+- 🧪 **Validações de Domínio**  
+- ⚙️ **CQRS (consistência imediata)**  
+- 🕒 **Event Sourcing**  
+- 🔄 **Unit of Work**  
+- 📁 **Repository Pattern**  
 
-🔄 AutoMapper
+---
 
-✅ FluentValidator
-
-📣 MediatR
-
-🧪 Swagger UI com suporte a JWT
-
-📦 .NET DevPack
-
-🔐 .NET DevPack.Identity
-
-🧱 Arquitetura e Padrões
-🧼 Separação de responsabilidades com princípios SOLID e Clean Code
-
-🧠 Domain Driven Design (camadas e padrão Domain Model)
-
-📢 Eventos de Domínio
-
-🚨 Notificações de Domínio
-
-🧪 Validações de Domínio
-
-⚙️ CQRS (consistência imediata)
-
-🕒 Event Sourcing
-
-🔄 Unit of Work
-
-📁 Repository Pattern
+📌 Este guideline serve como **base de referência** para estruturar projetos .NET Core seguindo boas práticas de **arquitetura limpa** e **DDD**.
